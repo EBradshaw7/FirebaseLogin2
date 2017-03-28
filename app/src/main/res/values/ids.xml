@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="lgBtn" type="id" />
+    <item name="lgBtn1" type="id" />
+    <item name="nameTxt" type="id" />
+    <item name="saveBtn" type="id" />
+</resources>
