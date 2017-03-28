@@ -19,9 +19,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Log out"
-        android:layout_alignBottom="@+id/button2"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="118dp" />
+        android:layout_marginBottom="14dp"
+        android:layout_above="@+id/button2"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:id="@+id/button2"
@@ -36,9 +36,10 @@
         android:id="@+id/addUserBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/lgoutBtn"
-        android:layout_centerVertical="true"
-        android:text="save" />
+        android:text="save"
+        android:layout_above="@+id/lgoutBtn"
+        android:layout_alignStart="@+id/lgoutBtn"
+        android:layout_marginBottom="15dp" />
 
     <EditText
         android:id="@+id/nameET"
@@ -55,10 +56,19 @@
         android:id="@+id/addressTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/editText"
-        android:layout_below="@+id/editText"
-        android:layout_marginTop="33dp"
+        android:layout_marginTop="14dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="address" />
+        android:text="address"
+        android:layout_below="@+id/nameET"
+        android:layout_alignStart="@+id/nameET" />
+
+    <TextView
+        android:id="@+id/textView123"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/addressTxt"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="42dp"
+        android:text="TextView" />
 </RelativeLayout>

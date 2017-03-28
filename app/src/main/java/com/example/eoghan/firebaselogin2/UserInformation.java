@@ -5,20 +5,29 @@ package com.example.eoghan.firebaselogin2;
  */
 
 public class UserInformation {
-    public String name;
-    public String address;
+    private String name;
+    private String address;
 
     public UserInformation(){
 
     }
 
-    public UserInformation(String name, String address) {
+    public UserInformation(String name, String address){
+
         this.name = name;
         this.address = address;
     }
 
-    public String getName(){
+
+    public String getName() {
         return name;
     }
+
+
+
+    public String getAddress() {
+        return address;
+    }
+
 
 }

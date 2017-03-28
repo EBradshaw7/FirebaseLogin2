@@ -11,8 +11,13 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import static android.widget.Toast.LENGTH_LONG;
 
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -22,6 +27,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private EditText editTextName;
     private EditText editTextAddress;
     private Button btnSave;
+    private TextView textViewData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +43,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
+        textViewData = (TextView) findViewById(R.id.textView123);
         editTextAddress =(EditText) findViewById(R.id.addressTxt);
         editTextName =(EditText) findViewById(R.id.nameET);
         btnSave = (Button) findViewById(R.id.addUserBtn);
@@ -52,14 +59,35 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     private void saveUserInfo() {
         String name = editTextName.getText().toString().trim();
-        String add = editTextAddress.getText().toString().trim();
+        String address = editTextAddress.getText().toString().trim();
 
-        UserInformation userInformation = new UserInformation(name, add);
+        UserInformation userInformation = new UserInformation(name, address);
 
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
             databaseReference.child(user.getUid()).setValue(userInformation);
-            Toast.makeText(this, "info saved", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "info saved", LENGTH_LONG).show();
+
+        //value listener
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                for (DataSnapshot postSnapshot : snapshot.getChildren()){
+                    //get data from snapshot
+                    UserInformation userInformation = postSnapshot.getValue(UserInformation.class);
+
+                    //add it to string
+                    String string = "Name: "+ userInformation.getName()+"\nAddress: " +userInformation.getAddress();
+                    textViewData.setText(string);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.print("fail" + databaseError.getMessage());
+            }
+        });
+
 
 
     }
