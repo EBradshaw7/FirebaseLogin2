@@ -28,6 +28,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private EditText editTextAddress;
     private Button btnSave;
     private TextView textViewData;
+    private Button checkinBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,11 +48,12 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         editTextAddress =(EditText) findViewById(R.id.addressTxt);
         editTextName =(EditText) findViewById(R.id.nameET);
         btnSave = (Button) findViewById(R.id.addUserBtn);
-
+        checkinBtn = (Button) findViewById(R.id.button2);
         FirebaseUser user = firebaseAuth.getCurrentUser();
         TextView tvWelcome = (TextView) findViewById(R.id.welcomeTV);
         buttonLogout = (Button) findViewById(R.id.lgoutBtn);
         buttonLogout.setOnClickListener(this);
+        checkinBtn.setOnClickListener(this);
         btnSave.setOnClickListener(this);
         tvWelcome.setText("welcome" +user.getEmail());
     }
@@ -100,6 +102,10 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         }
         if (v == btnSave){
             saveUserInfo();
+        }
+        if (v == checkinBtn){
+            finish();
+            startActivity(new Intent(this, UserAreaActivity.class));
         }
     }
 }
